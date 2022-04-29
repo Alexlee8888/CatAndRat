@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
-public class Mouse {
+public class Rat {
 
     private ArrayList<Location> position;
-    public Mouse() {
+    public Rat() {
         // initalize list and add some static numbers
     }
 
