@@ -19,7 +19,7 @@ public class CatAndMouseGame extends Canvas implements Runnable
         this.addKeyListener(inputHandler);
         this.addMouseListener(inputHandler);
         gameManager = new GameManager(inputHandler);
-        start();
+        // start();
     }
 
     public static void main(String[] args)
