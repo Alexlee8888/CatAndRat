@@ -1,3 +1,5 @@
 public class Person extends Player {
-    public Person()
+    public Person() {
+        
+    }
 }
