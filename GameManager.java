@@ -1,7 +1,6 @@
-public class GameManager
-{
-    public static void main(String[] args)
-    {
-        System.out.println("hi");
+public class GameManager {
+    private InputHandler inputHandler;
+    GameManager(InputHandler inputHandler) {
+        this.inputHandler = inputHandler;
     }
 }
