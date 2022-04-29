@@ -1,5 +1,13 @@
 public class Person extends Player {
-    public Person() {
-        
+    private InputHandler input;
+
+    public Person(InputHandler input) {
+        this.input = input;
+    }
+
+    @Override
+    public void swapRoles() {
+        // TODO Auto-generated method stub
+
     }
 }

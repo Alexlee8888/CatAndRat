@@ -3,8 +3,7 @@ import javax.swing.plaf.DimensionUIResource;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
-public class CatAndMouseGame extends Canvas implements Runnable
-{
+public class CatAndMouseGame extends Canvas implements Runnable {
     private static int backgroundWidth = 240 * 25 / 6;
     private static int backgroundHeight = 204 * 25 / 6;
     private static int canvasWidth = backgroundWidth;
@@ -28,24 +27,22 @@ public class CatAndMouseGame extends Canvas implements Runnable
 
     public void render() {
         BufferStrategy bs = this.getBufferStrategy();
-        if(bs == null) {
+        if (bs == null) {
             this.createBufferStrategy(3);
             return;
         }
-        Graphics g  = bs.getDrawGraphics();
+        Graphics g = bs.getDrawGraphics();
         rat.render(g);
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         CatAndMouseGame gameManager = new CatAndMouseGame();
         gameManager.repaint();
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
         // TODO Auto-generated method stub
-        
+
     }
 }

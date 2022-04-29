@@ -6,7 +6,7 @@ import java.awt.*;
 public class Rat {
 
     private Location position;
-    private double orientation; //degree
+    private double orientation; // degree
     private Image ratImage = Toolkit.getDefaultToolkit().getImage("rat.png");
 
     public Rat() {
@@ -18,13 +18,12 @@ public class Rat {
         g.drawImage(ratImage, position.getX(), position.getY(), 50, 50, null);
     }
 
-    public void move() {
-
+    public void move(Direction dir) {
+        position = position.getAdjacentLocation(dir);
     }
 
     public boolean isClicked(MouseEvent e) {
         return true;
     }
-
 
 }
