@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Window {
     private static JFrame frame;
-    public Window(DimensionUIResource dimension, CatAndMouseGame gameManager, String title) {
+    public Window(DimensionUIResource dimension, CatAndRatGame gameManager, String title) {
         frame = new JFrame(title);
         frame.setPreferredSize(dimension);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
