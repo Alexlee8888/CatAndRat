@@ -13,6 +13,10 @@ public class CatAndRatGame extends Canvas implements Runnable {
     private static final String title = "Cat and Mouse";
     private InputHandler inputHandler;
     private GameManager gameManager;
+    private Thread thread;
+    private boolean isAtHomeScreen = true;
+    private boolean isRunning = false;
+    private final double UPDATE_CAP = 1.0 / 60.0;
 
     // Test
     private Rat rat = new Rat();
@@ -23,7 +27,64 @@ public class CatAndRatGame extends Canvas implements Runnable {
         this.addKeyListener(inputHandler);
         this.addMouseListener(inputHandler);
         gameManager = new GameManager(inputHandler);
-        render();
+        requestFocus();
+        start();
+    }
+    
+
+    public void start() {
+        thread = new Thread(this);
+        thread.run();
+    }
+
+
+    @Override
+    public void run() {
+        isRunning = true;
+        boolean render = false;
+        double firstTime = 0;
+        double lastTime = System.nanoTime() / 1000000000.0;
+        double passedTime = 0;
+        double unprocessedTime = 0;
+        double frameTime = 0;
+        int frames = 0;
+        int fps = 0;
+        while (isRunning) {
+            render = false;
+            firstTime = System.nanoTime() / 1000000000.0;
+            passedTime = firstTime - lastTime;
+            lastTime = firstTime;
+
+            unprocessedTime += passedTime;
+            frameTime += passedTime;
+
+
+            while (unprocessedTime >= UPDATE_CAP) {
+                unprocessedTime -= UPDATE_CAP;
+                render = true;
+                requestFocus();
+                tick();
+                gameManager.update();
+                if (frameTime >= 1.0) {
+                    frameTime = 0;
+                    fps = frames;
+                    frames = 0;
+                    System.out.println("FPS: " + fps);
+                }
+
+
+            }
+            if (render) {
+                frames++;
+                render();
+            } else {
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public void render() {
@@ -34,12 +95,6 @@ public class CatAndRatGame extends Canvas implements Runnable {
         }
         Graphics g = bs.getDrawGraphics();
         rat.render(g);
-    }
-
-    @Override
-    public void run() {
-        // TODO Auto-generated method stub
-
     }
 
     public void paintHomeScreen(Graphics g) {
