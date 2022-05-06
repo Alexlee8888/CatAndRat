@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
-public class InputHandler implements KeyListener, MouseInputListener {
+public class InputHandler implements KeyListener, MouseInputListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
