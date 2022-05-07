@@ -1,3 +1,9 @@
+import javax.swing.*;
+import javax.swing.plaf.ButtonUI;
+import javax.swing.plaf.DimensionUIResource;
+import java.awt.*;
+import java.awt.image.BufferStrategy;
+
 public class GameManager {
     private InputHandler inputHandler;
     private boolean isMultiplayer;
@@ -15,5 +21,15 @@ public class GameManager {
             player2 = new Computer();
         }
         
+    }
+
+    public void tick() {
+        // update everything
+        // calculate everything
+    }
+
+    public void render(Graphics g) {
+        // render cat
+        // render rat
     }
 }
