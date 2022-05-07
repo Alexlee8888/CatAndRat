@@ -11,6 +11,8 @@ public class InputHandler implements KeyListener, MouseInputListener, MouseMotio
     private boolean[] keysLastPressed = new boolean[NUM_KEYS];
     private Location mouseClicked;
 
+
+
     public void update() {
         for(int i = 0; i < NUM_KEYS; i++) {
             keysLastPressed[i] = keysPressed[i];
@@ -66,14 +68,13 @@ public class InputHandler implements KeyListener, MouseInputListener, MouseMotio
 
     @Override
     public void keyPressed(KeyEvent e) {
-        keysPressed[e.getKeyCode()] = true;
+        //keysPressed[e.getKeyCode()] = true;
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        keysPressed[e.getKeyCode()] = false;
-
+        //keysPressed[e.getKeyCode()] = false;
     }
 
 }
