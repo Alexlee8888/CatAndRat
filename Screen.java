@@ -11,12 +11,11 @@ import java.awt.event.*;
 public class Screen extends JPanel implements ActionListener, KeyListener, MouseInputListener, MouseMotionListener{
 
     Timer t = new Timer (10, this);
-    InputHandler input = new InputHandler();
     Rat rat = new Rat(10, 10, 10, 10, 0, 0);
     
     public Screen() {
         setFocusable(true);
-        addKeyListener(input);
+        addKeyListener(this);
 
         t.start();
     }
@@ -81,7 +80,23 @@ public class Screen extends JPanel implements ActionListener, KeyListener, Mouse
 
     @Override
     public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
+        switch(e.getKeyCode()) {
+            case KeyEvent.VK_D:
+                rat.setDx(1);
+                break;
+
+            case KeyEvent.VK_S:
+                rat.setDy(1);
+                break;
+            
+            case KeyEvent.VK_A:
+                rat.setDx(-1);
+                break;
+            
+            case KeyEvent.VK_W:
+                rat.setDy(-1);
+                break;
+        }
         
     }
 
