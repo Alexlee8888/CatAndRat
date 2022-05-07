@@ -14,7 +14,8 @@ public class Screen extends JPanel implements ActionListener, KeyListener, Mouse
 
     Timer t = new Timer (10, this);
     Rat rat = new Rat(10, 10, 10, 10, 0, 0);
-    
+    Cat cat = new Cat(10, 10, 10, 10);
+
     public Screen() {
         setFocusable(true);
         addKeyListener(this);
@@ -30,18 +31,31 @@ public class Screen extends JPanel implements ActionListener, KeyListener, Mouse
     public void paint(Graphics g) {
         g.clearRect(0, 0, getWidth(), getHeight());
         rat.draw(g);
+        cat.draw(g);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        Point p = e.getPoint();
+        System.out.println(e.getX() + ", " + e.getY());
 
+        cat.setX(e.getX());
+        cat.setY(e.getY());
+        
+        double dx = e.getX() - cat.getLocation().getX();
+        double dy = e.getY() - cat.getLocation().getY();
+        cat.setAngle(Math.atan2(dy, dx));
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
+        System.out.println(e.getX() + ", " + e.getY());
         
+        cat.setX(e.getX());
+        cat.setY(e.getY());
+        
+        double dx = e.getX() - cat.getLocation().getX();
+        double dy = e.getY() - cat.getLocation().getY();
+        cat.setAngle(Math.atan2(dy, dx));
     }
 
     @Override
@@ -65,13 +79,14 @@ public class Screen extends JPanel implements ActionListener, KeyListener, Mouse
     @Override
     public void mouseDragged(MouseEvent e) {
         // TODO Auto-generated method stub
-        
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
+        double dx = e.getX() - cat.getLocation().getX();
+        double dy = e.getY() - cat.getLocation().getY();
+        cat.setAngle(Math.atan2(dx, dy));
+        repaint();
     }
 
     @Override

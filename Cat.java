@@ -1,27 +1,41 @@
 import java.util.ArrayList;
 import org.w3c.dom.events.MouseEvent;
 import javax.swing.*;
-import java.awt.*;
-public class Cat {
-    private Location position;
-    private double orientation; // degree
+
+import java.awt.Rectangle;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
+public class Cat extends Rectangle{
     private Image catImage = Toolkit.getDefaultToolkit().getImage("paw.png");
-    private InputHandler input = new InputHandler();
 
-    public Cat() {
-        position = new Location(100, 100);
-        orientation = 90;
+    private int x;
+    private int y;
+    private double angle;
+
+    public Cat(int x, int y, int width, int height) {
+        setBounds(x, y, width, height);
+        angle = 0;
+        this.x = x;
+        this.y = y;
     }
 
-    public void render(Graphics g) {
-        g.drawImage(catImage, position.getX(), position.getY(), 50, 50, null);
+    public void setAngle(double a){
+        this.angle = a;
+    }
+    
+    public void setX(int a){
+        this.x = a;
     }
 
-    public void move() {
-        // position = input.mouseMoved(MouseEvent e);
+    public void setY(int a){
+        this.y = a;
     }
 
-    public boolean isClicked(MouseEvent e) {
-        return true;
+    public void draw(Graphics g) {
+        Graphics2D gg = (Graphics2D)g;
+        g.fillRect(this.x, this.y, this.width, this.height);
+        gg.rotate(angle);
     }
 }
