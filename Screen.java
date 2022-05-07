@@ -7,6 +7,8 @@ import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox.KeySelectionManager;
 import javax.swing.event.MouseInputListener;
 import java.awt.event.*;
+import java.awt.*;
+import javax.swing.*;
 
 public class Screen extends JPanel implements ActionListener, KeyListener, MouseInputListener, MouseMotionListener{
 
@@ -32,8 +34,8 @@ public class Screen extends JPanel implements ActionListener, KeyListener, Mouse
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
+        Point p = e.getPoint();
+
     }
 
     @Override
