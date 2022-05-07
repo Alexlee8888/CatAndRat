@@ -104,7 +104,22 @@ public class Screen extends JPanel implements ActionListener, KeyListener, Mouse
 
     @Override
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-        
+        switch(e.getKeyCode()) {
+            case KeyEvent.VK_D:
+                rat.setDx(0);
+                break;
+
+            case KeyEvent.VK_S:
+                rat.setDy(0);
+                break;
+            
+            case KeyEvent.VK_A:
+                rat.setDx(0);
+                break;
+            
+            case KeyEvent.VK_W:
+                rat.setDy(0);
+                break;
+        }
     }
 }
