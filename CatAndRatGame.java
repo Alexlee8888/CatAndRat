@@ -26,7 +26,7 @@ public class CatAndRatGame extends Canvas implements Runnable {
         inputHandler = new InputHandler();
         this.addKeyListener(inputHandler);
         this.addMouseListener(inputHandler);
-        gameManager = new GameManager(inputHandler);
+        gameManager = new GameManager(inputHandler, true);
         requestFocus();
         start();
     }
@@ -63,8 +63,8 @@ public class CatAndRatGame extends Canvas implements Runnable {
                 unprocessedTime -= UPDATE_CAP;
                 render = true;
                 requestFocus();
-                tick();
-                gameManager.update();
+                // tick();
+                // gameManager.update();
                 if (frameTime >= 1.0) {
                     frameTime = 0;
                     fps = frames;

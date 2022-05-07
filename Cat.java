@@ -18,7 +18,7 @@ public class Cat {
     }
 
     public void move() {
-        position = input.mouseMoved(MouseEvent e);
+        // position = input.mouseMoved(MouseEvent e);
     }
 
     public boolean isClicked(MouseEvent e) {

@@ -6,40 +6,49 @@ import java.awt.*;
 import javax.swing.*;
 
 public class InputHandler implements KeyListener, MouseInputListener, MouseMotionListener {
+    private final int NUM_KEYS = 256;
+    private boolean[] keysPressed = new boolean[NUM_KEYS];
+    private boolean[] keysLastPressed = new boolean[NUM_KEYS];
+    private Location mouseClicked;
+
+    public void update() {
+        for(int i = 0; i < NUM_KEYS; i++) {
+            keysLastPressed[i] = keysPressed[i];
+        }
+
+    }
+
+    public Location getMouseClick() {
+        return mouseClicked;
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-
+        mouseClicked = new Location(e.getX(), e.getY());
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -57,13 +66,13 @@ public class InputHandler implements KeyListener, MouseInputListener, MouseMotio
 
     @Override
     public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
+        keysPressed[e.getKeyCode()] = true;
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
+        keysPressed[e.getKeyCode()] = false;
 
     }
 

@@ -1,7 +1,9 @@
 public abstract class Player {
-    private int lives;
+    private int lives = 5;
     private boolean isCat;
 
-    public abstract void swapRoles();
+    public void swapRoles() {
+
+    }
 
 }
