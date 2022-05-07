@@ -173,7 +173,7 @@ public class CatAndRatGame extends Canvas implements Runnable {
         }
         Graphics g = bs.getDrawGraphics();
         g.setColor(Color.CYAN);
-        g.drawRect(0, 0, backgroundWidth, backgroundHeight);
+        g.fillRect(0, 0, backgroundWidth, backgroundHeight);
 
 //        AffineTransform identity = new AffineTransform();
 //        g2d.setTransform(identity);
