@@ -24,6 +24,14 @@ public class InputHandler implements KeyListener, MouseInputListener, MouseMotio
         return mouseClicked;
     }
 
+    public boolean isKeyPressed(int keyCode) {
+        return keysPressed[keyCode];
+    }
+
+    public boolean isKeyUp(int keyCode) {
+        return !keysPressed[keyCode] && keysLastPressed[keyCode];
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         mouseClicked = new Location(e.getX(), e.getY());
@@ -68,13 +76,13 @@ public class InputHandler implements KeyListener, MouseInputListener, MouseMotio
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //keysPressed[e.getKeyCode()] = true;
+        keysPressed[e.getKeyCode()] = true;
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        //keysPressed[e.getKeyCode()] = false;
+        keysPressed[e.getKeyCode()] = false;
     }
 
 }

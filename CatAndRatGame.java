@@ -31,29 +31,11 @@ public class CatAndRatGame extends Canvas implements Runnable {
     private boolean gameStarted = false;
     private boolean isAtHomeScreen = true;
     private Window window;
-
-    public void setIsPlayClicked(boolean bool) {
-        isPlayButtonClicked = bool;
-        isGameOver = false;
-        isAtHomeScreen = false;
-    }
-
-    public void setIsGameOver(boolean bool) {
-        isGameOver = bool;
-        isPlayButtonClicked = false;
-        isAtHomeScreen = false;
-    }
-
-    public void setIsAtHomeScreen(boolean bool) {
-        isAtHomeScreen = bool;
-        isPlayButtonClicked = false;
-        isGameOver = false;
-    }
+    private Frame frame;
 
     public CatAndRatGame() {
 
         window = new Window(windowDimension, this, "Cat and Mouse Game");
-
         inputHandler = new InputHandler();
         this.addKeyListener(inputHandler);
         this.addMouseListener(inputHandler);
@@ -64,40 +46,7 @@ public class CatAndRatGame extends Canvas implements Runnable {
     }
 
     public void startMultiplayerGame() {
-        // winner = null;
-        // if (objectHandler != null) {
-        //     camera = new Camera(0, 0, windowDimension, objectHandler);
-        // }
-        // if (gameStarted) {
-        //     return;
-        // }
-        // Scanner sc = null;
-        // try {
-        //     sc = new Scanner(new File("WallPlacements"));
-        // } catch (FileNotFoundException e) {
-        // }
 
-        // for (int i = 0; i < (34 * 40); i++) {
-        //     int currInt = sc.nextInt();
-        //     if (currInt == 0) {
-        //         continue;
-        //     }
-        //     WallObject wallObject = new WallObject(((i % 40) * 25), (i / 40) * 25, objectHandler);
-        //     objectHandler.addObject(wallObject);
-        //     if (currInt == 1) {
-        //         objectHandler.addHittableObject(wallObject);
-        //     }
-        // }
-
-        // TankObject player1 = new TankObject(100, 700, TankType.PLAYER_ONE_TANK_TYPE, objectHandler, this);
-        // TankObject player2 = new TankObject(800, 150, TankType.PLAYER_TWO_TANK_TYPE, objectHandler, this);
-
-        // objectHandler.addObject(player1);
-        // objectHandler.addHittableObject(player1);
-        // objectHandler.addObject(player2);
-        // objectHandler.addHittableObject(player2);
-        // objectHandler.setTankIndexes();
-        // gameStarted = true;
     }
 
     public void start() {
@@ -172,41 +121,7 @@ public class CatAndRatGame extends Canvas implements Runnable {
             return;
         }
         Graphics g = bs.getDrawGraphics();
-        g.setColor(Color.CYAN);
-        g.fillRect(0, 0, backgroundWidth, backgroundHeight);
-
-//        AffineTransform identity = new AffineTransform();
-//        g2d.setTransform(identity);
-
-//         if (camera != null) {
-// //            g2d.translate(-camera.getX(), -camera.getY());
-
-//         }
-//         g.drawImage(BACKGROUND, 0, 0, backgroundWidth, backgroundHeight, null);
-//         g.drawImage(BACKGROUND2, backgroundWidth, 0, backgroundWidth, backgroundHeight, null);
-
-//         if (isAtHomeScreen) {
-//             objectHandler.getButtons().removeAll(objectHandler.getButtons());
-//             paintHomeScreen(g);
-//         } else if (isPlayButtonClicked) {
-//             for (int i = 0; i < objectHandler.getButtons().size(); i++) {
-//                 GameButton button = (GameButton) objectHandler.getButtons().get(i);
-//                 button.setIsClickable(false);
-//             }
-//             startMultiplayerGame();
-//         } else if (isGameOver) {
-
-
-//             objectHandler.getButtons().removeAll(objectHandler.getButtons());
-//             gameStarted = false;
-//             paintEndScreen(g);
-//         }
-
-
-//         if (objectHandler.getGameObjects().size() != 0) {
-//             drawHearts(g, objectHandler.getGameObjects().get(Handler.PLAYER_ONE));
-//             drawHearts(g, objectHandler.getGameObjects().get(Handler.PLAYER_TWO));
-//         }
+        g.clearRect(0, 0, canvasWidth, canvasHeight);
         gameManager.render(g);
 
         g.dispose();

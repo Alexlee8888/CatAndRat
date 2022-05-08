@@ -9,6 +9,8 @@ public class GameManager {
     private boolean isMultiplayer;
     private Player player1;
     private Player player2;
+    // only for testing
+    private Rat rat;
 
     GameManager(InputHandler inputHandler, boolean isMultiplayer) {
         this.inputHandler = inputHandler;
@@ -20,15 +22,21 @@ public class GameManager {
         else {
             player2 = new Computer();
         }
-        
+        rat = new Rat(50, 50, 0, 0, 270, inputHandler);
     }
 
     public void tick() {
         // update everything
+        rat.update();
+        // player1.update();
+        // player2.update();
         // calculate everything
     }
 
     public void render(Graphics g) {
+        rat.draw(g);
+        // player1.draw(g);
+        // player2.draw(g);
         // render cat
         // render rat
     }
