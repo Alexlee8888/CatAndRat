@@ -9,6 +9,7 @@ public class GameManager {
     private boolean isMultiplayer;
     private Player player1;
     private Player player2;
+    // only for testing
     private Rat rat;
 
     GameManager(InputHandler inputHandler, boolean isMultiplayer) {
