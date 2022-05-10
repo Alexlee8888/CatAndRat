@@ -34,12 +34,14 @@ public class InputHandler implements KeyListener, MouseInputListener, MouseMotio
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        System.out.println(e.getX() + ", " + e.getY());
         mouseClicked = new Location(e.getX(), e.getY());
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        System.out.println(e.getX() + ", " + e.getY());
+        mouseClicked = new Location(e.getX(), e.getY());
     }
 
     @Override
