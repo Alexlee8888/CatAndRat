@@ -2,47 +2,47 @@ import java.util.ArrayList;
 import org.w3c.dom.events.MouseEvent;
 import javax.swing.*;
 
+import java.awt.geom.AffineTransform;
 import java.awt.Rectangle;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
+
 public class Cat extends THINGYCHANGE{
-    private Image catImage = Toolkit.getDefaultToolkit().getImage("paw.png");
+    private static Image catImage = Toolkit.getDefaultToolkit().getImage("paw.png");
 
-    private int x;
-    private int y;
+    private double x;
+    private double y;
+    private InputHandler inputHandler;
     private double angle;
-
-    public Cat(int x, int y) {
+    private static int width = 250;
+    private static int height = 250;
+ 
+    public Cat(InputHandler input) {
+        inputHandler = input;
         angle = 0;
-        this.x = x;
-        this.y = y;
+        x = 500;
+        y = 500;
     }
 
-    public void setAngle(double a){
-        this.angle = a;
-    }
-    
-    public void setX(int a){
-        this.x = a;
+    public void update(Location e){
+        x = e.getX();       
+        y = e.getY();
     }
 
-    public void setY(int a){
-        this.y = a;
+    public void reset(){
+        x = 500;
+        y = 500;
+        angle = 0;
     }
 
     public void draw(Graphics g) {
-        Graphics2D gg = (Graphics2D)g;
-        // g.fillRect(this.x, this.y, this.width, this.height);
-        gg.rotate(angle);
+        Graphics2D g2 = (Graphics2D)g;
+        AffineTransform identity = new AffineTransform();
+
+        //g2.setTransform(identity);
+        //g2.rotate(Math.toRadians(angle), x, y);
+        g.drawImage(catImage, (int) (x - (width/2)), (int) (y - (height/2)), width, height, null);
     }
-    /*
-    cat.setX(e.getX());
-        cat.setY(e.getY());
-        
-        double dx = e.getX() - cat.getLocation().getX();
-        double dy = e.getY() - cat.getLocation().getY();
-        cat.setAngle(Math.atan2(dy, dx));
-    */
 }

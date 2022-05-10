@@ -9,7 +9,8 @@ public class InputHandler implements KeyListener, MouseInputListener, MouseMotio
     private final int NUM_KEYS = 256;
     private boolean[] keysPressed = new boolean[NUM_KEYS];
     private boolean[] keysLastPressed = new boolean[NUM_KEYS];
-    private Location mouseClicked;
+    private Location mouseClicked = null;
+    private Location mouseReleased = null;
 
 
 
@@ -20,10 +21,6 @@ public class InputHandler implements KeyListener, MouseInputListener, MouseMotio
 
     }
 
-    public Location getMouseClick() {
-        return mouseClicked;
-    }
-
     public boolean isKeyPressed(int keyCode) {
         return keysPressed[keyCode];
     }
@@ -32,10 +29,22 @@ public class InputHandler implements KeyListener, MouseInputListener, MouseMotio
         return !keysPressed[keyCode] && keysLastPressed[keyCode];
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        System.out.println(e.getX() + ", " + e.getY());
-        mouseClicked = new Location(e.getX(), e.getY());
+    // ------=================+=================------ \\
+
+    public Location getMouseClick() {
+        return mouseClicked;
+    }
+
+    public Location getMouseRelease(){
+        return mouseReleased;
+    }
+
+    public void resetClickPoint(){
+        mouseClicked = null;
+    }
+
+    public void resetReleasePoint(){
+        mouseReleased = null;
     }
 
     @Override
@@ -46,6 +55,14 @@ public class InputHandler implements KeyListener, MouseInputListener, MouseMotio
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        System.out.println("Mouse Released");
+        mouseReleased = new Location(e.getX(), e.getY());
+    }
+
+    // ------=================+=================------ \\
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
 
     }
 
