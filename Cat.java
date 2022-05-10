@@ -34,7 +34,7 @@ public class Cat extends THINGYCHANGE{
 
     public void draw(Graphics g) {
         Graphics2D gg = (Graphics2D)g;
-        g.fillRect(this.x, this.y, this.width, this.height);
+        // g.fillRect(this.x, this.y, this.width, this.height);
         gg.rotate(angle);
     }
     /*

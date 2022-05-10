@@ -22,7 +22,7 @@ public class GameManager {
         else {
             player2 = new Computer();
         }
-        rat = new Rat(50, 50, 0, 0, 270, inputHandler);
+        rat = new Rat(50, 50, 270, inputHandler);
     }
 
     public void tick() {
