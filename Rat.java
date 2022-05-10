@@ -14,15 +14,17 @@ public class Rat extends THINGYCHANGE {
 
     // private int dx;
     // private int dy;
-    private int x;
-    private int y;
+    private double x;
+    private double y;
     private double angle;
     private InputHandler inputHandler;
-    private static int width = 50;
-    private static int height = 50;
+    private static int width = 100;
+    private static int height = 100;
     private static Image ratImage = Toolkit.getDefaultToolkit().getImage("rat.png");
-    private static int DEGREES_TURNED = 2;
-    private static int RAT_SPEED = 3;
+    private static int DEGREES_TURNED = 4;
+    private static int RAT_SPEED = 5;
+    private static int MOVE_FORWARD = 1;
+    private static int MOVE_BACKWARD = -1;
     // public Rat(int x, int y, int width, int height, int dx, int dy, InputHandler inputHandler) {
     //     setBounds(x, y, width, height);
     //     this.dx = dx;
@@ -30,7 +32,7 @@ public class Rat extends THINGYCHANGE {
     //     this.inputHandler = inputHandler;
     // }
     
-    public Rat(int x, int y, double angle, InputHandler inputHandler) {
+    public Rat(double x, double y, double angle, InputHandler inputHandler) {
         this.x = x;
         this.y = y;
         // this.dx = dx;
@@ -49,10 +51,10 @@ public class Rat extends THINGYCHANGE {
             angle -= DEGREES_TURNED;
         }
         if(inputHandler.isKeyPressed(KeyEvent.VK_W) || inputHandler.isKeyPressed(KeyEvent.VK_UP)) {
-            x -= RAT_SPEED;
+            moveRat(MOVE_FORWARD);
         }
         else if(inputHandler.isKeyPressed(KeyEvent.VK_S) || inputHandler.isKeyPressed(KeyEvent.VK_DOWN)) {
-            x += RAT_SPEED;
+            moveRat(MOVE_BACKWARD);
         }
 
         // if(inputHandler.isKeyUp(KeyEvent.VK_D) || inputHandler.isKeyUp(KeyEvent.VK_RIGHT)||inputHandler.isKeyUp(KeyEvent.VK_A) || inputHandler.isKeyUp(KeyEvent.VK_LEFT)) {
@@ -64,6 +66,13 @@ public class Rat extends THINGYCHANGE {
         
     }
 
+    public void moveRat(int forwardBackward) {
+        double deltaX = forwardBackward * (RAT_SPEED*Math.cos(Math.toRadians(angle)));
+        double deltaY = forwardBackward * (RAT_SPEED*Math.sin(Math.toRadians(angle)));
+        x += deltaX;
+        y += deltaY;
+    }
+
     public void draw(Graphics g) {
         g.setColor(Color.black);
         Graphics2D g2d = (Graphics2D) g;
@@ -73,7 +82,7 @@ public class Rat extends THINGYCHANGE {
 
         g2d.setTransform(identity);
         g2d.rotate(Math.toRadians(angle), x, y);
-        g.drawImage(ratImage, x - (width/2), y - (height/2), width, height, null);
+        g.drawImage(ratImage, (int) (x - (width/2)), (int) (y - (height/2)), width, height, null);
     }
 
     // public void setDx(int dx) {
