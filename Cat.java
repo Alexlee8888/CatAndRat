@@ -38,8 +38,8 @@ public class Cat extends THINGYCHANGE{
     }
 
     public void draw(Graphics g) {
-        Graphics2D g2 = (Graphics2D)g;
-        AffineTransform identity = new AffineTransform();
+        // Graphics2D g2 = (Graphics2D)g;
+        // AffineTransform identity = new AffineTransform();
 
         //g2.setTransform(identity);
         //g2.rotate(Math.toRadians(angle), x, y);

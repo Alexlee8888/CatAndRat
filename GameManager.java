@@ -47,8 +47,9 @@ public class GameManager {
     }
 
     public void render(Graphics g) {
-        rat.draw(g);
         cat.draw(g);
+        rat.draw(g);
+        
         // player1.draw(g);
         // player2.draw(g);
         // render cat

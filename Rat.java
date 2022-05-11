@@ -65,9 +65,9 @@ public class Rat extends THINGYCHANGE {
         Graphics2D g2d = (Graphics2D) g;
         // draw rect
 
-        AffineTransform identity = new AffineTransform();
+        // AffineTransform identity = new AffineTransform();
 
-        g2d.setTransform(identity);
+        // g2d.setTransform(identity);
         g2d.rotate(Math.toRadians(angle), x, y);
         g.drawImage(ratImage, (int) (x - (width / 2)), (int) (y - (height / 2)), width, height, null);
     }
