@@ -6,4 +6,8 @@ public abstract class Player {
 
     }
 
+    public void loseLife() {
+        
+    }
+
 }
