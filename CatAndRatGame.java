@@ -12,8 +12,8 @@ public class CatAndRatGame extends Canvas implements Runnable {
 
     private static int backgroundWidth = 240 * 25 / 6;
     private static int backgroundHeight = 204 * 25 / 6;
-    private static int canvasWidth = backgroundWidth;
-    private static int canvasHeight = backgroundHeight + 22;
+    public static int canvasWidth = backgroundWidth;
+    public static int canvasHeight = backgroundHeight + 22;
 
 
     private static Image BACKGROUND = Toolkit.getDefaultToolkit().getImage("background.png");
