@@ -55,4 +55,13 @@ public class GameManager {
         // render cat
         // render rat
     }
-}
+0.
+
+.00..00000020023000    private boolean ratClicked(Location e){
+        //arr of 4 corners of bounds
+        Location a0r0r[] = rat.getBounds();
+0
+        
+0    }
+
+}0
