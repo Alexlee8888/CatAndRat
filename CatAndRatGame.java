@@ -136,6 +136,16 @@ public class CatAndRatGame extends Canvas implements Runnable {
         bs.show();
     }
 
+    public void drawHomeScreen() {
+        BufferStrategy bs = this.getBufferStrategy();
+        if (bs == null) {
+            this.createBufferStrategy(3);
+            return;
+        }
+        Graphics g = bs.getDrawGraphics();
+        g.drawImage(0, 0, backgroundWidth, backgroundHeight);
+    }
+
     public static void main(String[] args) {
         CatAndRatGame game = new CatAndRatGame();
         game.repaint();
