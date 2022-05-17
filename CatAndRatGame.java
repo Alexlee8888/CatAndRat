@@ -143,7 +143,8 @@ public class CatAndRatGame extends Canvas implements Runnable {
             return;
         }
         Graphics g = bs.getDrawGraphics();
-        g.drawImage(0, 0, backgroundWidth, backgroundHeight);
+        //g.drawImage(null, 0, 0, backgroundWidth, backgroundHeight, background, parent);
+       
     }
 
     public static void main(String[] args) {
