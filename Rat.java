@@ -6,7 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 
-public class Rat extends THINGYCHANGE {
+public class Rat {
 
     private double x; 
     private double y;

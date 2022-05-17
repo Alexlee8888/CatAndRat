@@ -9,7 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-public class Cat extends THINGYCHANGE{
+public class Cat {
     private static Image catImage = Toolkit.getDefaultToolkit().getImage("paw.png");
 
     private double x;
@@ -22,8 +22,8 @@ public class Cat extends THINGYCHANGE{
     public Cat(InputHandler input) {
         inputHandler = input;
         angle = 0;
-        x = 500;
-        y = 500;
+        x = 99999;
+        y = 99999;
     }
 
     public void update(Location e){
@@ -32,8 +32,8 @@ public class Cat extends THINGYCHANGE{
     }
 
     public void reset(){
-        x = 500;
-        y = 500;
+        x = 9999;
+        y = 9999;
         angle = 0;
     }
 

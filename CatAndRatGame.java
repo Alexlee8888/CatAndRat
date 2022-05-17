@@ -6,6 +6,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * only multiplayer
+ * two scores displayed at all times: Player 1 and Player 2
+ * You can only get points if you are cat -- +1 for each time you click rat
+ * 3 rounds: in each round, each player gets 20 s to be the cat, then switch sides
+ * at the end, whoever has more points wins
+ */
+
 public class CatAndRatGame extends Canvas implements Runnable {
 
     private static final long serialVersionUID = 1L;
@@ -39,7 +47,7 @@ public class CatAndRatGame extends Canvas implements Runnable {
         inputHandler = new InputHandler();
         this.addKeyListener(inputHandler);
         this.addMouseListener(inputHandler);
-        gameManager = new GameManager(inputHandler, true);
+        gameManager = new GameManager(inputHandler);
 
 
         start();

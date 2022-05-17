@@ -1,5 +1,5 @@
 public class Player {
-    private int lives = 5;
+    private int score = 0;
     private boolean isCat;
     private Cat cat;
     private Rat rat;
@@ -25,15 +25,14 @@ public class Player {
             rat = new Rat(input);
             cat = null;
         }
-        lives = 5;
     }
 
-    public void loseLife() {
-        lives--;
+    public void addScore() {
+        score++;
     }
 
-    public int getLives() {
-        return lives;
+    public int getScore() {
+        return score;
     }
 
     public boolean isCat() {
@@ -47,9 +46,4 @@ public class Player {
     public Rat getRat() {
         return rat;
     }
-
-    // public void update() {
-    //     rat.update();
-    //     cat.update(input.getMouseClick());
-    // }
 }
