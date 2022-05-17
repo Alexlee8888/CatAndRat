@@ -3,17 +3,21 @@ import javax.swing.plaf.ButtonUI;
 import javax.swing.plaf.DimensionUIResource;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class GameManager {
     private InputHandler inputHandler;
     private boolean isMultiplayer;
     private Player player1;
     private Player player2;
+    private TreeMap<Integer, ArrayList<String>> leaderboard;
     // only for testing
     // private Rat rat;
     // private Cat cat;
 
     GameManager(InputHandler inputHandler, boolean isMultiplayer) {
+        leaderboard = new TreeMap<>();
         this.inputHandler = inputHandler;
         this.isMultiplayer = isMultiplayer;
         player1 = new Person(true, inputHandler); //player 1 is cat, player 2 is rat
@@ -87,28 +91,24 @@ public class GameManager {
 
     public void render(Graphics g) {
         if(player1.isCat()) {
-            player1.getCat().draw(g);
+            // player1.getCat().draw(g);
             player2.getRat().draw(g);
         } else {
             player1.getRat().draw(g);
-            player2.getCat().draw(g);
+            // player2.getCat().draw(g);
         }
 
         // render cat
         // render rat
     }
-<<<<<<< HEAD
-0.
 
-.00..00000020023000    private boolean ratClicked(Location e){
+private boolean ratClicked(Location e){
         //arr of 4 corners of bounds
         Location a0r0r[] = rat.getBounds();
-0
         
-0    }
+    }
 
-}0
-=======
+}
 
     public void swapRoles() {
         System.out.println("swapped");
