@@ -9,7 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-public class Cat extends THINGYCHANGE{
+public class Cat {
     private static Image catImage = Toolkit.getDefaultToolkit().getImage("paw.png");
 
     private double x;

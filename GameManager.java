@@ -8,7 +8,6 @@ import java.util.TreeMap;
 
 public class GameManager {
     private InputHandler inputHandler;
-    private boolean isMultiplayer;
     private Player player1;
     private Player player2;
     private TreeMap<Integer, ArrayList<String>> leaderboard;
@@ -16,17 +15,11 @@ public class GameManager {
     // private Rat rat;
     // private Cat cat;
 
-    GameManager(InputHandler inputHandler, boolean isMultiplayer) {
+    GameManager(InputHandler inputHandler) {
         leaderboard = new TreeMap<>();
         this.inputHandler = inputHandler;
-        this.isMultiplayer = isMultiplayer;
         player1 = new Person(true, inputHandler); //player 1 is cat, player 2 is rat
-        if(isMultiplayer) {
-            player2 = new Person(false, inputHandler);
-        }
-        else {
-            player2 = new Computer(); //computer automatically moves rat
-        }
+        player2 = new Person(false, inputHandler); //player 1 is cat, player 2 is rat
     }
 
     public void tick() {
@@ -34,17 +27,11 @@ public class GameManager {
         if (inputHandler.getMouseClick() != null){
             if(player1.isCat()) {
                 player1.getCat().update(inputHandler.getMouseClick());
+                player1.getCat().reset();
             } else {
                 player2.getCat().update(inputHandler.getMouseClick());
+                player2.getCat().reset();
             }
-
-            // check if rat is clicked on
-            // if (rat.isClicked()){
-            //     swapRoles();
-            // }
-            // else{
-            //     loseLife();
-            // }
 
             Location [] hitbox;
             if(player1.isCat()) {
@@ -57,17 +44,13 @@ public class GameManager {
             if(click.getX() >= hitbox[0].getX() && click.getX() <= hitbox[1].getX() && click.getY() >= hitbox[0].getY() && click.getY() <= hitbox[1].getY()) {
                 System.out.println("clicked");
                 if(player1.isCat()) {
-                    player2.loseLife();
+                    player1.addScore();
                 } else {
-                    player1.loseLife();
+                    player2.addScore();
                 }
-                System.out.println("player 1 lives: " + player1.getLives() + " player 2 lives: " + player2.getLives());
+                System.out.println("player 1 lives: " + player1.getScore() + " player 2 lives: " + player2.getScore());
             }
-
-            if(player1.getLives() <= 0 || player2.getLives() <= 0) {
-                swapRoles();
-            }
-
+            
             inputHandler.resetClickPoint();
         }
 
@@ -91,30 +74,22 @@ public class GameManager {
 
     public void render(Graphics g) {
         if(player1.isCat()) {
-            // player1.getCat().draw(g);
+            player1.getCat().draw(g);
             player2.getRat().draw(g);
         } else {
             player1.getRat().draw(g);
-            // player2.getCat().draw(g);
+            player2.getCat().draw(g);
         }
 
         // render cat
         // render rat
     }
 
-private boolean ratClicked(Location e){
-        //arr of 4 corners of bounds
-        Location a0r0r[] = rat.getBounds();
-        
-    }
-
-}
-
-    public void swapRoles() {
+    public void swapRoles(){
         System.out.println("swapped");
         player1.swapRoles();
         player2.swapRoles();
-        System.out.println("player 1 lives: " + player1.getLives() + " player 2 lives: " + player2.getLives());
-    }
+        System.out.println("player 1 lives: " + player1.getScore() + " player 2 lives: " + player2.getScore());
+    }   
 }
 >>>>>>> eb2ff7e84c6d38712d8e31fe6029a445933ef500
