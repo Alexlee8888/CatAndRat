@@ -8,7 +8,7 @@ import java.awt.geom.AffineTransform;
 
 public class Rat extends THINGYCHANGE {
 
-    private double x;
+    private double x; 
     private double y;
     private double angle;
 
@@ -23,13 +23,16 @@ public class Rat extends THINGYCHANGE {
     private static int RAT_SPEED = 9;
     private static int MOVE_FORWARD = 1;
     private static int MOVE_BACKWARD = -1;
+    public static double startingX;
+    public static double startingY;
+    public static double startingAngle;
 
 
-    public Rat(double x, double y, double angle, InputHandler inputHandler) {
-        this.x = x;
-        this.y = y;
+    public Rat(InputHandler inputHandler) {
+        this.x = startingX;
+        this.y = startingY;
 
-        this.angle = angle;
+        this.angle = startingAngle;
         this.inputHandler = inputHandler;
     }
 
@@ -47,9 +50,13 @@ public class Rat extends THINGYCHANGE {
 
         double deltaX = v * Math.cos(Math.toRadians(angle));
         double deltaY = v * Math.sin(Math.toRadians(angle));
-        x += deltaX;
-        y += deltaY;
-
+        if(deltaX + x >= 0 && deltaX + x < CatAndRatGame.canvasWidth) {
+            x += deltaX;
+        }
+        if(deltaY + y >= 0 && deltaY + y < CatAndRatGame.canvasHeight) {
+            y += deltaY;
+        }
+        
         v *= 0.95;
 
     }
@@ -74,5 +81,14 @@ public class Rat extends THINGYCHANGE {
 
     public void setAngle(int angle) {
         this.angle = angle;
+    }
+
+    public Location[] getHitbox(){
+        Location [] box = new Location [2]; //[0]: top left , [1]: bottom right
+        Location left = new Location(x - 28, y - 28);
+        Location right = new Location(x + 28, y + 28);
+        box[0] = left;
+        box[1] = right;
+        return box;
     }
 }
