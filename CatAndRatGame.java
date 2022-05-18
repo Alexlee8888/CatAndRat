@@ -17,15 +17,11 @@ import java.util.Scanner;
 public class CatAndRatGame extends Canvas implements Runnable {
 
     private static final long serialVersionUID = 1L;
-
+    private static Image bg = Toolkit.getDefaultToolkit().getImage("carpet bg.jpeg");
     private static int backgroundWidth = 240 * 25 / 6;
     private static int backgroundHeight = 204 * 25 / 6;
     public static int canvasWidth = backgroundWidth;
     public static int canvasHeight = backgroundHeight + 22;
-
-
-    private static Image BACKGROUND = Toolkit.getDefaultToolkit().getImage("background.png");
-    private static Image BACKGROUND2 = Toolkit.getDefaultToolkit().getImage("background2.png");
     public static final Dimension windowDimension = new Dimension(canvasWidth, canvasHeight);
 
 
@@ -34,12 +30,7 @@ public class CatAndRatGame extends Canvas implements Runnable {
     private GameManager gameManager;
     private boolean isRunning = false;
     private Thread thread;
-    private boolean isPlayButtonClicked = false;
-    private boolean isGameOver = false;
-    private boolean gameStarted = false;
-    private boolean isAtHomeScreen = true;
     private Window window;
-    private Frame frame;
 
     public CatAndRatGame() {
 
@@ -129,23 +120,21 @@ public class CatAndRatGame extends Canvas implements Runnable {
             return;
         }
         Graphics g = bs.getDrawGraphics();
-        g.clearRect(0, 0, canvasWidth, canvasHeight);
+        
+        drawHomeScreen(g);
         gameManager.render(g);
 
         g.dispose();
         bs.show();
     }
 
-    public void drawHomeScreen() {
-        BufferStrategy bs = this.getBufferStrategy();
-        if (bs == null) {
-            this.createBufferStrategy(3);
-            return;
-        }
-        Graphics g = bs.getDrawGraphics();
-        //g.drawImage(null, 0, 0, backgroundWidth, backgroundHeight, background, parent);
-       
+    public void drawHomeScreen(Graphics g) {
+        g.drawImage(bg, 0, 0, null);
     }
+
+
+
+
 
     public static void main(String[] args) {
         CatAndRatGame game = new CatAndRatGame();
