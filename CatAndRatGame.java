@@ -26,8 +26,8 @@ public class CatAndRatGame extends Canvas implements Runnable {
     private Window window;
     private static final int backgroundWidth = 240 * 25 / 6;
     private static final int backgroundHeight = 204 * 25 / 6;
-    private static final int canvasWidth = backgroundWidth;
-    private static final int canvasHeight = backgroundHeight + 22;
+    public static final int canvasWidth = backgroundWidth; // width of canvas
+    public static final int canvasHeight = backgroundHeight + 22; // height of canvas
     private static final Image bg = Toolkit.getDefaultToolkit().getImage("carpet bg.jpeg");
     private static final long serialVersionUID = 1L;
     private static final Dimension windowDimension = new Dimension(canvasWidth, canvasHeight);
@@ -82,13 +82,6 @@ public class CatAndRatGame extends Canvas implements Runnable {
         double unprocessedTime = 0;
         double frameTime = 0;
         gameManager.timer();
-<<<<<<< Updated upstream
-        //gameManager.getTimer().start();
-        
-=======
-        gameManager.getTimer().start();
-
->>>>>>> Stashed changes
         while (isRunning) {
             render = false;
             firstTime = System.nanoTime() / 1000000000.0;
@@ -118,7 +111,7 @@ public class CatAndRatGame extends Canvas implements Runnable {
                 }
             }
 
-            isRunning = !gameManager.gameOver;
+            // isRunning = !gameManager.gameOver;
         }
 
         //end game
@@ -126,23 +119,10 @@ public class CatAndRatGame extends Canvas implements Runnable {
         render();
     }
 
-<<<<<<< Updated upstream
-    // public void paintEnd() {
-    //     BufferStrategy bs = this.getBufferStrategy();
-    //     if (bs == null) {
-    //         this.createBufferStrategy(3);
-    //         return;
-    //     }
-    //     Graphics g = bs.getDrawGraphics();
-
-        
-    // }
-=======
     /**
      * draws the carpet for the background of the game
      * and then renders the cat, rat, scoreboard, etc.
      */
->>>>>>> Stashed changes
     public void render() {
         BufferStrategy bs = this.getBufferStrategy();
         if (bs == null) {
@@ -150,7 +130,6 @@ public class CatAndRatGame extends Canvas implements Runnable {
             return;
         }
         Graphics g = bs.getDrawGraphics();
-<<<<<<< Updated upstream
         if(isRunning) {
             drawHomeScreen(g);
             gameManager.render(g);
@@ -162,13 +141,11 @@ public class CatAndRatGame extends Canvas implements Runnable {
             // System.out.println(gameManager.winString());
             g.setFont(new Font("TimesRoman", Font.BOLD, 100));
             g.setColor(Color.BLACK);
-            g.drawString(gameManager.winString(), 30, 30);
+            // g.drawString(gameManager.winString(), 30, 30);
         }
-=======
 
         drawHomeScreen(g);
         gameManager.render(g);
->>>>>>> Stashed changes
         g.dispose();
         bs.show();
     }

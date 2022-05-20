@@ -16,9 +16,7 @@ public class GameManager {
     private int second, minute;
     private DecimalFormat dFormat = new DecimalFormat("00");
     private String decs, decm;
-    private String timerLabel = "00:30";
-    private int rounds = 2;
-    public boolean gameOver = false;
+    private String timerLabel = "";
 
     /**
      * constructor for game manager, creates 2 new players (multiplayer game)
@@ -105,6 +103,10 @@ public class GameManager {
         // System.out.println("player 1 lives: " + player1.getScore() + " player 2 lives: " + player2.getScore());
     }
 
+    /**
+     * draws scoreboard using times roman
+     * @param g
+     */
     public void drawScoreBoard(Graphics g) {
         g.setColor(Color.BLACK);
 
@@ -117,10 +119,9 @@ public class GameManager {
     }
 
     public void timer() {
-        this.minute = 0;
-        this.second = 10;
+        this.minute = 1;
+        this.second = 30;
         int delay = 1000; //milliseconds
-        timerLabel = "00:10";
         ActionListener taskPerf = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				second--;
@@ -137,36 +138,14 @@ public class GameManager {
 				}
 				if(minute==0 && second==0) {
 					timer.stop();
-                    swapRoles();
-                    rounds--;
-                    if(rounds > 0) {
-                        timer();
-                    } else {
-                        gameOver = true;
-                    }
 				}
-                
 			}
 
         };
-
-
         timer = new Timer(delay, taskPerf);
-        timer.start();
     }
 
     public Timer getTimer() {
         return timer;
     }
-
-    public String winString() {
-        if(player1.getScore() > player2.getScore()) {
-            return "Player 1 won!";
-        } else if (player2.getScore() > player1.getScore()) {
-            return "Player 2 won!";
-        } else {
-            return "It's a tie!";
-        }
-    }
-
 }
