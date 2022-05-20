@@ -134,8 +134,6 @@ public class CatAndRatGame extends Canvas implements Runnable {
 
 
 
-
-
     public static void main(String[] args) {
         CatAndRatGame game = new CatAndRatGame();
         game.repaint();
