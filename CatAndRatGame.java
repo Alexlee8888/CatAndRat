@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+import javax.swing.Timer;
 
 /**
  * only multiplayer
@@ -74,6 +75,9 @@ public class CatAndRatGame extends Canvas implements Runnable {
         int frames = 0;
         int fps = 0;
 
+        gameManager.timer();
+        gameManager.getTimer().start();
+        
         while (isRunning) {
             render = false;
             firstTime = System.nanoTime() / 1000000000.0;
@@ -131,8 +135,6 @@ public class CatAndRatGame extends Canvas implements Runnable {
     public void drawHomeScreen(Graphics g) {
         g.drawImage(bg, 0, 0, null);
     }
-
-
 
 
 
