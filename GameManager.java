@@ -3,16 +3,24 @@ import javax.swing.plaf.ButtonUI;
 import javax.swing.plaf.DimensionUIResource;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.TreeMap;
-import java.util.Timer;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GameManager {
     private InputHandler inputHandler;
     private Player player1;
     private Player player2;
     private TreeMap<Integer, ArrayList<String>> leaderboard;
-    private Timer timer = new Timer();
+    private Timer timer;
+    private int second, minute;
+    private DecimalFormat dFormat = new DecimalFormat("00");
+    private String decs, decm;
+    private String timerLabel = "";
+
     // only for testing
     // private Rat rat;
     // private Cat cat;
@@ -76,6 +84,7 @@ public class GameManager {
 
     public void render(Graphics g) {
         drawScoreBoard(g);
+        g.drawString(timerLabel, 800, 50);
         if(player1.isCat()) {
             player1.getCat().draw(g);
             player2.getRat().draw(g);
@@ -104,5 +113,38 @@ public class GameManager {
         g.drawString(player1score, 10, 50);
         String player2score = "Player 2 (" + (player2.isCat() ? "Cat) : " : "Rat) : ") + String.valueOf(player2.getScore());
         g.drawString(player2score, 10, 100);
+    }
+
+    public void timer() {
+        this.minute = 1;
+        this.second = 30;
+        int delay = 1000; //milliseconds
+        ActionListener taskPerf = new ActionListener() {
+            //@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				second--;
+				decs = dFormat.format(second);
+				decm = dFormat.format(minute);	
+                timerLabel = decm + ":" + decs;
+				
+				if(second==-1) {
+					second = 59;
+					minute--;
+					decs = dFormat.format(second);
+					decm = dFormat.format(minute);	
+                    timerLabel = decm + ":" + decs;
+				}
+				if(minute==0 && second==0) {
+					timer.stop();
+				}
+			}
+
+        };
+        timer = new Timer(delay, taskPerf);
+    }
+
+    public Timer getTimer() {
+        return timer;
     }
 }
