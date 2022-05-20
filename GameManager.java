@@ -1,20 +1,17 @@
-import javax.swing.*;
-import javax.swing.plaf.ButtonUI;
-import javax.swing.plaf.DimensionUIResource;
 import java.awt.*;
-import java.awt.image.BufferStrategy;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.TreeMap;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * manages the logic of the game
+ */
 public class GameManager {
     private InputHandler inputHandler;
     private Player player1;
     private Player player2;
-    private TreeMap<Integer, ArrayList<String>> leaderboard;
+    // private TreeMap<Integer, ArrayList<String>> leaderboard;
     private Timer timer;
     private int second, minute;
     private DecimalFormat dFormat = new DecimalFormat("00");
@@ -23,10 +20,10 @@ public class GameManager {
     private int rounds = 2;
     public boolean gameOver = false;
 
-    // only for testing
-    // private Rat rat;
-    // private Cat cat;
-
+    /**
+     * constructor for game manager, creates 2 new players (multiplayer game)
+     * @param inputHandler key/mouse listener
+     */
     GameManager(InputHandler inputHandler) {
         // leaderboard = new TreeMap<>();
         this.inputHandler = inputHandler;
@@ -34,6 +31,10 @@ public class GameManager {
         player2 = new Person(false, inputHandler); //player 1 is cat, player 2 is rat
     }
 
+    /**
+     * updates everything and checks for mouse clicks from the player who is controlling cat
+     * then updates score accordingly
+     */
     public void tick() {
         // check for click
         if (inputHandler.getMouseClick() != null){
@@ -42,16 +43,12 @@ public class GameManager {
             } else {
                 player2.getCat().update(inputHandler.getMouseClick());
             }
-
-            
-
             Location [] hitbox;
             if(player1.isCat()) {
                 hitbox = player2.getRat().getHitbox();
             } else {
                 hitbox = player1.getRat().getHitbox();
             }
-
             Location click = inputHandler.getMouseClick();
             if(click.getX() >= hitbox[0].getX() && click.getX() <= hitbox[1].getX() && click.getY() >= hitbox[0].getY() && click.getY() <= hitbox[1].getY()) {
                 System.out.println("clicked");
@@ -65,7 +62,6 @@ public class GameManager {
 
             inputHandler.resetClickPoint();
         }
-
         // check for release
         if (inputHandler.getMouseRelease() != null){
             if(player1.isCat()) {
@@ -75,7 +71,6 @@ public class GameManager {
             }
             inputHandler.resetReleasePoint();
         }
-
         // update everything
         if(player1.isCat()) {
             player2.getRat().update();
@@ -84,6 +79,10 @@ public class GameManager {
         }
     }
 
+    /**
+     * draws cat, rat, scoreboard
+     * @param g graphics
+     */
     public void render(Graphics g) {
         drawScoreBoard(g);
         g.drawString(timerLabel, 800, 50);
@@ -94,16 +93,16 @@ public class GameManager {
             player1.getRat().draw(g);
             player2.getCat().draw(g);
         }
-
-        // render cat
-        // render rat
     }
 
+    /**
+     * After round is over, player 1 and player 2 swaps roles
+     */
     public void swapRoles() {
-        System.out.println("swapped");
+        // System.out.println("swapped");
         player1.swapRoles();
         player2.swapRoles();
-        System.out.println("player 1 lives: " + player1.getScore() + " player 2 lives: " + player2.getScore());
+        // System.out.println("player 1 lives: " + player1.getScore() + " player 2 lives: " + player2.getScore());
     }
 
     public void drawScoreBoard(Graphics g) {
@@ -123,9 +122,7 @@ public class GameManager {
         int delay = 1000; //milliseconds
         timerLabel = "00:10";
         ActionListener taskPerf = new ActionListener() {
-            //@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				second--;
 				decs = dFormat.format(second);
 				decm = dFormat.format(minute);	
