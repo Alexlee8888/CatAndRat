@@ -19,7 +19,9 @@ public class GameManager {
     private int second, minute;
     private DecimalFormat dFormat = new DecimalFormat("00");
     private String decs, decm;
-    private String timerLabel = "";
+    private String timerLabel = "00:30";
+    private int rounds = 2;
+    public boolean gameOver = false;
 
     // only for testing
     // private Rat rat;
@@ -116,9 +118,10 @@ public class GameManager {
     }
 
     public void timer() {
-        this.minute = 1;
-        this.second = 30;
+        this.minute = 0;
+        this.second = 10;
         int delay = 1000; //milliseconds
+        timerLabel = "00:10";
         ActionListener taskPerf = new ActionListener() {
             //@Override
 			public void actionPerformed(ActionEvent e) {
@@ -137,14 +140,36 @@ public class GameManager {
 				}
 				if(minute==0 && second==0) {
 					timer.stop();
+                    swapRoles();
+                    rounds--;
+                    if(rounds > 0) {
+                        timer();
+                    } else {
+                        gameOver = true;
+                    }
 				}
+                
 			}
 
         };
+
+
         timer = new Timer(delay, taskPerf);
+        timer.start();
     }
 
     public Timer getTimer() {
         return timer;
     }
+
+    public String winString() {
+        if(player1.getScore() > player2.getScore()) {
+            return "Player 1 won!";
+        } else if (player2.getScore() > player1.getScore()) {
+            return "Player 2 won!";
+        } else {
+            return "It's a tie!";
+        }
+    }
+
 }

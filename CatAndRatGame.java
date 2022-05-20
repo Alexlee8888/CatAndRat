@@ -76,7 +76,7 @@ public class CatAndRatGame extends Canvas implements Runnable {
         int fps = 0;
 
         gameManager.timer();
-        gameManager.getTimer().start();
+        //gameManager.getTimer().start();
         
         while (isRunning) {
             render = false;
@@ -113,9 +113,25 @@ public class CatAndRatGame extends Canvas implements Runnable {
                     e.printStackTrace();
                 }
             }
+
+            isRunning = !gameManager.gameOver;
         }
+
+        //end game
+        render = true;
+        render();
     }
 
+    // public void paintEnd() {
+    //     BufferStrategy bs = this.getBufferStrategy();
+    //     if (bs == null) {
+    //         this.createBufferStrategy(3);
+    //         return;
+    //     }
+    //     Graphics g = bs.getDrawGraphics();
+
+        
+    // }
     public void render() {
 
         BufferStrategy bs = this.getBufferStrategy();
@@ -124,10 +140,19 @@ public class CatAndRatGame extends Canvas implements Runnable {
             return;
         }
         Graphics g = bs.getDrawGraphics();
-        
-        drawHomeScreen(g);
-        gameManager.render(g);
-
+        if(isRunning) {
+            drawHomeScreen(g);
+            gameManager.render(g);
+        }
+        else {
+            g.setColor(Color.white);
+            g.fillRect(0, 0, canvasWidth, canvasHeight);
+            bs.show();
+            // System.out.println(gameManager.winString());
+            g.setFont(new Font("TimesRoman", Font.BOLD, 100));
+            g.setColor(Color.BLACK);
+            g.drawString(gameManager.winString(), 30, 30);
+        }
         g.dispose();
         bs.show();
     }
