@@ -17,7 +17,6 @@ import java.awt.image.BufferStrategy;
  * and rat every frame
  * 
  */
-
 public class CatAndRatGame extends Canvas implements Runnable {
     private InputHandler inputHandler;
     private GameManager gameManager;
@@ -32,15 +31,7 @@ public class CatAndRatGame extends Canvas implements Runnable {
     private static final long serialVersionUID = 1L;
     private static final Dimension windowDimension = new Dimension(canvasWidth, canvasHeight);
     private static final double UPDATE_CAP = 1.0 / 60.0;
-
-    /**
-     * constructor for cat and rat game
-     * creates a window, adds key listener and mouse listener, creates a game
-     * manager
-     * starts the game
-     */
     public CatAndRatGame() {
-
         window = new Window(windowDimension, this, "Cat and Mouse Game");
         inputHandler = new InputHandler();
         this.addKeyListener(inputHandler);
@@ -48,18 +39,12 @@ public class CatAndRatGame extends Canvas implements Runnable {
         gameManager = new GameManager(inputHandler);
         start();
     }
-
-    /**
-     * creates a new thread and runs it
-     */
+    public void startMultiplayerGame() {
+    }
     public void start() {
         thread = new Thread(this);
         thread.run();
     }
-
-    /**
-     * 
-     */
     public void stop() {
         isRunning = false;
         try {
@@ -68,11 +53,6 @@ public class CatAndRatGame extends Canvas implements Runnable {
             e.printStackTrace();
         }
     }
-
-    /**
-     * Game Loop
-     * draws and updates everything around 60 times per second
-     */
     public void run() {
         isRunning = true;
         boolean render = false;
@@ -81,16 +61,18 @@ public class CatAndRatGame extends Canvas implements Runnable {
         double passedTime = 0;
         double unprocessedTime = 0;
         double frameTime = 0;
+        int frames = 0;
+        int fps = 0;
+
         gameManager.timer();
+        gameManager.getTimer().start();
         while (isRunning) {
             render = false;
             firstTime = System.nanoTime() / 1000000000.0;
             passedTime = firstTime - lastTime;
             lastTime = firstTime;
-
             unprocessedTime += passedTime;
             frameTime += passedTime;
-
             while (unprocessedTime >= UPDATE_CAP) {
                 unprocessedTime -= UPDATE_CAP;
                 render = true;
@@ -99,9 +81,13 @@ public class CatAndRatGame extends Canvas implements Runnable {
                 inputHandler.update();
                 if (frameTime >= 1.0) {
                     frameTime = 0;
+                    fps = frames;
+                    frames = 0;
+                    //System.out.println("FPS: " + fps);
                 }
             }
             if (render) {
+                frames++;
                 render();
             } else {
                 try {
@@ -111,25 +97,22 @@ public class CatAndRatGame extends Canvas implements Runnable {
                 }
             }
 
-            // isRunning = !gameManager.gameOver;
+            isRunning = !gameManager.gameOver;
         }
 
         //end game
-        render = true;
         render();
     }
 
-    /**
-     * draws the carpet for the background of the game
-     * and then renders the cat, rat, scoreboard, etc.
-     */
     public void render() {
+
         BufferStrategy bs = this.getBufferStrategy();
         if (bs == null) {
             this.createBufferStrategy(3);
             return;
         }
         Graphics g = bs.getDrawGraphics();
+
         if(isRunning) {
             drawHomeScreen(g);
             gameManager.render(g);
@@ -141,31 +124,16 @@ public class CatAndRatGame extends Canvas implements Runnable {
             // System.out.println(gameManager.winString());
             g.setFont(new Font("TimesRoman", Font.BOLD, 100));
             g.setColor(Color.BLACK);
-            // g.drawString(gameManager.winString(), 30, 30);
+            g.drawString(gameManager.winString(), 30, 30);
         }
-
-        drawHomeScreen(g);
-        gameManager.render(g);
         g.dispose();
         bs.show();
     }
-
-    /**
-     * draws the homescreen
-     * 
-     * @param g graphics
-     */
     public void drawHomeScreen(Graphics g) {
         g.drawImage(bg, 0, 0, null);
     }
-
-    /**
-     * main function that creates a new CatAndRatGame when run
-     * 
-     * @param args args
-     */
     public static void main(String[] args) {
         CatAndRatGame game = new CatAndRatGame();
+        game.repaint();
     }
-
 }
