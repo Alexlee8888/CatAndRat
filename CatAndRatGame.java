@@ -27,10 +27,12 @@ public class CatAndRatGame extends Canvas implements Runnable {
     private static final int backgroundHeight = 204 * 25 / 6;
     public static final int canvasWidth = backgroundWidth; // width of canvas
     public static final int canvasHeight = backgroundHeight + 22; // height of canvas
+    private static final Image endFrame = Toolkit.getDefaultToolkit().getImage("end_menu_background.png");
     private static final Image bg = Toolkit.getDefaultToolkit().getImage("carpet bg.jpeg");
     private static final long serialVersionUID = 1L;
     private static final Dimension windowDimension = new Dimension(canvasWidth, canvasHeight);
     private static final double UPDATE_CAP = 1.0 / 60.0;
+    
     public CatAndRatGame() {
         window = new Window(windowDimension, this, "Cat and Mouse Game");
         inputHandler = new InputHandler();
@@ -39,20 +41,21 @@ public class CatAndRatGame extends Canvas implements Runnable {
         gameManager = new GameManager(inputHandler);
         start();
     }
-    public void startMultiplayerGame() {
-    }
+
     public void start() {
         thread = new Thread(this);
         thread.run();
     }
-    public void stop() {
-        isRunning = false;
+
+    public void stop() { 
         try {
             thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
     }
+
     public void run() {
         isRunning = true;
         boolean render = false;
@@ -96,12 +99,11 @@ public class CatAndRatGame extends Canvas implements Runnable {
                     e.printStackTrace();
                 }
             }
-
-            isRunning = !gameManager.gameOver;
         }
 
         //end game
-        render();
+        // stop();
+        // render();
     }
 
     public void render() {
@@ -112,25 +114,26 @@ public class CatAndRatGame extends Canvas implements Runnable {
             return;
         }
         Graphics g = bs.getDrawGraphics();
-
-        if(isRunning) {
-            drawHomeScreen(g);
-            gameManager.render(g);
+        drawHomeScreen(g);
+        if(gameManager.gameOver) {
+            drawEndScreen(g);
         }
         else {
-            g.setColor(Color.white);
-            g.fillRect(0, 0, canvasWidth, canvasHeight);
-            bs.show();
-            // System.out.println(gameManager.winString());
-            g.setFont(new Font("TimesRoman", Font.BOLD, 100));
-            g.setColor(Color.BLACK);
-            g.drawString(gameManager.winString(), 30, 30);
+            gameManager.render(g);
         }
         g.dispose();
         bs.show();
     }
     public void drawHomeScreen(Graphics g) {
         g.drawImage(bg, 0, 0, null);
+    }
+    public void drawEndScreen(Graphics g) {
+        g.drawImage(endFrame, 0, 0, backgroundWidth, backgroundHeight, this);
+        g.setFont(new Font("TimesRoman", Font.BOLD, 50));
+        g.setColor(Color.BLACK);
+        g.drawString(gameManager.winString(), 415, 300);
+        g.drawString(gameManager.returnScore(), 455, 400);
+        g.drawString("Player 1      Player 2", 285, 500);
     }
     public static void main(String[] args) {
         CatAndRatGame game = new CatAndRatGame();

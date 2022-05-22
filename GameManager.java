@@ -135,9 +135,9 @@ public class GameManager {
      */
     public void timer() {
         this.minute = 0;
-        this.second = 10;
+        this.second = 2;
         int delay = 1000; // milliseconds
-        timerLabel = "00:10";
+        timerLabel = dFormat.format(minute) + ":" + dFormat.format(second);
         ActionListener taskPerf = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 second--;
@@ -182,6 +182,10 @@ public class GameManager {
         } else {
             return "It's a tie!";
         }
+    }
+
+    public String returnScore() {
+        return player1.getScore() + " : " + player2.getScore();
     }
 
     /**
