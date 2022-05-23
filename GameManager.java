@@ -42,10 +42,8 @@ public class GameManager {
         if (inputHandler.getMouseClick() != null) {
             if (player1.isCat()) {
                 player1.getCat().update(inputHandler.getMouseClick());
-                player1.getCat().reset();
             } else {
                 player2.getCat().update(inputHandler.getMouseClick());
-                player2.getCat().reset();
             }
             Location[] hitbox;
             if (player1.isCat()) {
@@ -96,8 +94,8 @@ public class GameManager {
             player1.getCat().draw(g);
             player2.getRat().draw(g);
         } else {
-            player1.getRat().draw(g);
             player2.getCat().draw(g);
+            player1.getRat().draw(g);
         }
     }
 

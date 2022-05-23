@@ -14,6 +14,7 @@ public class InputHandler implements KeyListener, MouseInputListener {
     private boolean[] keysLastPressed = new boolean[NUM_KEYS];
     private Location mouseClicked = null;
     private Location mouseReleased = null;
+    private Location mouseLocation = null;
 
 
     /**
@@ -101,6 +102,10 @@ public class InputHandler implements KeyListener, MouseInputListener {
 
     // ------=================+=================------ \\
 
+    public Location getMouseLocation(){
+        return mouseLocation;
+    }
+    
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -113,18 +118,17 @@ public class InputHandler implements KeyListener, MouseInputListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        mouseLocation = null;
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-
+        mouseLocation = new Location(e.getX(), e.getY());
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        // TODO Auto-generated method stub
-
+        mouseLocation = new Location(e.getX(), e.getY());
     }
 
     /**

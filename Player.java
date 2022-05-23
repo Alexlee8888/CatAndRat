@@ -12,7 +12,7 @@ public class Player {
         this.isCat = isCat;
         this.input = input;
         if(isCat) { 
-            cat = new Cat();
+            cat = new Cat(input);
         } else {
             rat = new Rat(input);
         }
@@ -24,7 +24,7 @@ public class Player {
     public void swapRoles() {
         isCat = !isCat;
         if(isCat) {
-            cat = new Cat();
+            cat = new Cat(input);
             rat = null;
         }
         else {
