@@ -113,7 +113,7 @@ public class InputHandler implements KeyListener, MouseInputListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        mouseLocation = new Location(e.getX(), e.getY());
     }
 
     @Override

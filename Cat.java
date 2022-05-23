@@ -22,12 +22,12 @@ public class Cat {
 
     /**
      * constructor for cat
-     * starts off screen at (99999,99999)
+     * starts off screen at (9999,9999)
      */
     public Cat(InputHandler i) {
         input = i;
-        x = 99999;
-        y = 99999;
+        x = 9999;
+        y = 9999;
     }
 
     /**
