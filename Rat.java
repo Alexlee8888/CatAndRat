@@ -6,6 +6,9 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 
+/**
+ * rat class creates a rat instance that a player can control by clicking the w, a, s, d, keys to move around within the window
+ */
 public class Rat {
 
     private double x; 
@@ -28,6 +31,10 @@ public class Rat {
     public static double startingAngle;
 
 
+    /**
+     * creates an instance of rat with intitial position at 0, 0 
+     * @param inputHandler inputhandler to process keystrokes
+     */
     public Rat(InputHandler inputHandler) {
         this.x = startingX;
         this.y = startingY;
@@ -36,6 +43,9 @@ public class Rat {
         this.inputHandler = inputHandler;
     }
 
+    /**
+     * updates the rat's position by checking input handlers pressedkeys array
+     */
     public void update() {
         if (inputHandler.isKeyPressed(KeyEvent.VK_D) || inputHandler.isKeyPressed(KeyEvent.VK_RIGHT)) {
             angle += DEGREES_TURNED;
@@ -61,12 +71,20 @@ public class Rat {
 
     }
 
+    /**
+     * calculates the velocity components for the rat
+     * @param forwardBackward number to increase/decrease velocity by
+     */
     public void moveRat(int forwardBackward) {
         v += forwardBackward;
         v = Math.min(v, RAT_SPEED);
         v = Math.max(v, -RAT_SPEED);
     }
 
+    /**
+     * draws the rat
+     * @param g graphics
+     */
     public void draw(Graphics g) {
         g.setColor(Color.black);
         Graphics2D g2d = (Graphics2D) g;
@@ -79,10 +97,17 @@ public class Rat {
         g.drawImage(ratImage, (int) (x - (width / 2)), (int) (y - (height / 2)), width, height, null);
     }
 
+    /**
+     * sets the rat's angle
+     * @param angle
+     */
     public void setAngle(int angle) {
         this.angle = angle;
     }
 
+    /**
+     * calculates the hitbox for rat, to determine if it is clicked or not. updates with position
+     */
     public Location[] getHitbox(){
         Location [] box = new Location [2]; //[0]: top left , [1]: bottom right
         Location left = new Location(x - 28, y - 28);

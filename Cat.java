@@ -1,44 +1,52 @@
-import java.util.ArrayList;
-import org.w3c.dom.events.MouseEvent;
-import javax.swing.*;
-
-import java.awt.geom.AffineTransform;
-import java.awt.Rectangle;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-//test
+/**
+ * A class cat that uses a mouse listener to listen to when the player/cat
+ * clicks on the screen.
+ * It draws itself where the latest click was
+ */
 public class Cat {
-    private static Image catImage = Toolkit.getDefaultToolkit().getImage("paw.png");
-
     private double x;
     private double y;
-    private InputHandler inputHandler;
-    private double angle;
+    private static Image catImage = Toolkit.getDefaultToolkit().getImage("paw.png");
     private static int width = 250;
     private static int height = 250;
- 
-    public Cat(InputHandler input) {
-        inputHandler = input;
-        angle = 0;
-        x = -9999;
-        y = -9999;
+
+    /**
+     * constructor for cat
+     * starts off screen at (99999,99999)
+     */
+    public Cat() {
+        x = 99999;
+        y = 99999;
     }
 
-    public void update(Location e){
+    /**
+     * updates x coord and y coord
+     * 
+     * @param e location
+     */
+    public void update(Location e) {
         x = e.getX();
         y = e.getY();
     }
 
-    public void reset(){
-        x = -9999;
-        y = -9999;
-        angle = 0;
+    /**
+     * resets it so it is not seen after mouse is clicked
+     */
+    public void reset() {
+        x = 9999;
+        y = 9999;
     }
 
+    /**
+     * draws the paw at x and y coordinates
+     * 
+     * @param g graphics
+     */
     public void draw(Graphics g) {
-        g.drawImage(catImage, (int) (x - (width/2)), (int) (y - (height/2)), width, height, null);
+        g.drawImage(catImage, (int) (x - (width / 2)), (int) (y - (height / 2)), width, height, null);
     }
 }
