@@ -131,9 +131,18 @@ public class CatAndRatGame extends Canvas implements Runnable {
         g.drawImage(endFrame, 0, 0, backgroundWidth, backgroundHeight, this);
         g.setFont(new Font("TimesRoman", Font.BOLD, 50));
         g.setColor(Color.BLACK);
-        g.drawString(gameManager.winString(), 415, 300);
-        g.drawString(gameManager.returnScore(), 455, 400);
-        g.drawString("Player 1      Player 2", 285, 500);
+
+        String winString = gameManager.winString();
+        int winLength = (int)g.getFontMetrics().getStringBounds(winString, g).getWidth();
+        g.drawString(winString, canvasWidth/2 - winLength/2, 300);
+
+        String scoreString = gameManager.returnScore();
+        int scoreLength = (int)g.getFontMetrics().getStringBounds(scoreString, g).getWidth();
+        g.drawString(scoreString, canvasWidth/2 - scoreLength/2, 400);
+
+        String playerString = "Player 1 : Player 2";
+        int playerLength = (int)g.getFontMetrics().getStringBounds(playerString, g).getWidth();
+        g.drawString(playerString, canvasWidth/2 - playerLength/2, 500);
     }
     public static void main(String[] args) {
         CatAndRatGame game = new CatAndRatGame();

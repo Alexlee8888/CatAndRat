@@ -135,7 +135,7 @@ public class GameManager {
      */
     public void timer() {
         this.minute = 0;
-        this.second = 2;
+        this.second = 10;
         int delay = 1000; // milliseconds
         timerLabel = dFormat.format(minute) + ":" + dFormat.format(second);
         ActionListener taskPerf = new ActionListener() {
