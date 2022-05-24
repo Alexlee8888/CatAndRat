@@ -58,23 +58,27 @@ public class Cat {
         Point p = MouseInfo.getPointerInfo().getLocation();
         SwingUtilities.convertPointFromScreen(p, CatAndRatGame.getInstance());
 
+        // small paw
         if (x == 9999){
             g.drawImage(catImage, (int)p.getX() - width / 4, (int)p.getY() - height / 4 , width/2, height/2, null);
         }
 
+        // big paw
         g.drawImage(catImage, (int) (x - (width / 2)), (int) (y - (height / 2)), width, height, null);
 
+        // instructions for cat pouncing
         Graphics2D g2d = (Graphics2D) g;
-
         AffineTransform at = new AffineTransform();
-        at.translate(500, 745);
-        at.rotate(Math.atan((p.getY() - 745) / (p.getX() - 500)) + (p.getX() < 500 ? Math.toRadians(180) : 0)) ;
+
+        at.translate(500, 790);
+        at.rotate(Math.atan((p.getY() - 790) / (p.getX() - 500)) + (p.getX() < 500 ? Math.toRadians(180) : 0)) ;
         at.scale(0.3, 0.3);
+        // flips image if crossed middle line
         if (p.getX() < 500) {
             at.scale(1, -1);
         }
 
-        // center
+        // centers image to window
         at.translate(-catPouncing.getWidth(CatAndRatGame.getInstance()) / 2, -catPouncing.getHeight(CatAndRatGame.getInstance()) / 2);
 
         g2d.drawImage(catPouncing, at, null);

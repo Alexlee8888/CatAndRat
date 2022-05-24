@@ -62,7 +62,7 @@ public class GameManager {
                 }
                 System.out.println("player 1 score: " + player1.getScore() + " player 2 score: " + player2.getScore());
             }
-            
+
             inputHandler.resetClickPoint();
         }
         // check for release
@@ -91,11 +91,11 @@ public class GameManager {
         drawScoreBoard(g);
         g.drawString(timerLabel, 800, 50);
         if (player1.isCat()) {
-            player1.getCat().draw(g);
             player2.getRat().draw(g);
+            player1.getCat().draw(g);
         } else {
-            player2.getCat().draw(g);
             player1.getRat().draw(g);
+            player2.getCat().draw(g);
         }
     }
 

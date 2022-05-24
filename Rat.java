@@ -7,11 +7,12 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 
 /**
- * rat class creates a rat instance that a player can control by clicking the w, a, s, d, keys to move around within the window
+ * rat class creates a rat instance that a player can control by clicking the w,
+ * a, s, d, keys to move around within the window
  */
 public class Rat {
 
-    private double x; 
+    private double x;
     private double y;
     private double angle;
 
@@ -30,9 +31,9 @@ public class Rat {
     public static double startingY;
     public static double startingAngle;
 
-
     /**
-     * creates an instance of rat with intitial position at 0, 0 
+     * creates an instance of rat with intitial position at 0, 0
+     * 
      * @param inputHandler inputhandler to process keystrokes
      */
     public Rat(InputHandler inputHandler) {
@@ -60,19 +61,20 @@ public class Rat {
 
         double deltaX = v * Math.cos(Math.toRadians(angle));
         double deltaY = v * Math.sin(Math.toRadians(angle));
-        if(deltaX + x >= 0 && deltaX + x < CatAndRatGame.canvasWidth) {
+        if (deltaX + x >= 0 && deltaX + x < CatAndRatGame.canvasWidth) {
             x += deltaX;
         }
-        if(deltaY + y >= 0 && deltaY + y < CatAndRatGame.canvasHeight) {
+        if (deltaY + y >= 0 && deltaY + y < CatAndRatGame.canvasHeight) {
             y += deltaY;
         }
-        
+
         v *= 0.95;
 
     }
 
     /**
      * calculates the velocity components for the rat
+     * 
      * @param forwardBackward number to increase/decrease velocity by
      */
     public void moveRat(int forwardBackward) {
@@ -83,6 +85,7 @@ public class Rat {
 
     /**
      * draws the rat
+     * 
      * @param g graphics
      */
     public void draw(Graphics g) {
@@ -90,15 +93,18 @@ public class Rat {
         Graphics2D g2d = (Graphics2D) g;
         // draw rect
 
-        // AffineTransform identity = new AffineTransform();
-
-        // g2d.setTransform(identity);
-        g2d.rotate(Math.toRadians(angle), x, y);
-        g.drawImage(ratImage, (int) (x - (width / 2)), (int) (y - (height / 2)), width, height, null);
+        AffineTransform identity = new AffineTransform();
+        identity.translate(x, y);
+        identity.rotate(Math.toRadians(angle));
+        identity.scale(1.0 / division, 1.0 / division);
+        identity.translate(-ratImage.getWidth(CatAndRatGame.getInstance()) / 2,
+                -ratImage.getHeight(CatAndRatGame.getInstance()) / 2);
+        g2d.drawImage(ratImage, identity, null);
     }
 
     /**
      * sets the rat's angle
+     * 
      * @param angle
      */
     public void setAngle(int angle) {
@@ -106,10 +112,11 @@ public class Rat {
     }
 
     /**
-     * calculates the hitbox for rat, to determine if it is clicked or not. updates with position
+     * calculates the hitbox for rat, to determine if it is clicked or not. updates
+     * with position
      */
-    public Location[] getHitbox(){
-        Location [] box = new Location [2]; //[0]: top left , [1]: bottom right
+    public Location[] getHitbox() {
+        Location[] box = new Location[2]; // [0]: top left , [1]: bottom right
         Location left = new Location(x - 28, y - 28);
         Location right = new Location(x + 28, y + 28);
         box[0] = left;
