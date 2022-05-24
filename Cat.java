@@ -1,3 +1,4 @@
+import javax.swing.SwingUtilities;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -55,17 +56,27 @@ public class Cat {
      */
     public void draw(Graphics g) {
         Point p = MouseInfo.getPointerInfo().getLocation();
+        SwingUtilities.convertPointFromScreen(p, CatAndRatGame.getInstance());
+
         if (x == 9999){
-            g.drawImage(catImage, (int)p.getX() - 335, (int)p.getY() - 92, width/2, height/2, null);
+            g.drawImage(catImage, (int)p.getX() - width / 4, (int)p.getY() - height / 4 , width/2, height/2, null);
         }
+
         g.drawImage(catImage, (int) (x - (width / 2)), (int) (y - (height / 2)), width, height, null);
 
-        /*Graphics2D g2d = (Graphics2D) g;
-        AffineTransform backup = g2d.getTransform();
-        AffineTransform a = AffineTransform.getRotateInstance(Math.tan((p.getY() - 500)/(p.getX() - 500)));
-        g2d.setTransform(a);
+        Graphics2D g2d = (Graphics2D) g;
 
-        g2d.drawImage(catImage, 500, 500, null);
-        g2d.transform(backup);*/
+        AffineTransform at = new AffineTransform();
+        at.translate(500, 745);
+        at.rotate(Math.atan((p.getY() - 745) / (p.getX() - 500)) + (p.getX() < 500 ? Math.toRadians(180) : 0)) ;
+        at.scale(0.3, 0.3);
+        if (p.getX() < 500) {
+            at.scale(1, -1);
+        }
+
+        // center
+        at.translate(-catPouncing.getWidth(CatAndRatGame.getInstance()) / 2, -catPouncing.getHeight(CatAndRatGame.getInstance()) / 2);
+
+        g2d.drawImage(catPouncing, at, null);
     }
 }

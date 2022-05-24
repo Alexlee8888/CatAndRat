@@ -32,6 +32,12 @@ public class CatAndRatGame extends Canvas implements Runnable {
     private static final long serialVersionUID = 1L;
     private static final Dimension windowDimension = new Dimension(canvasWidth, canvasHeight);
     private static final double UPDATE_CAP = 1.0 / 60.0;
+
+    private static CatAndRatGame instance;
+
+    public static CatAndRatGame getInstance() {
+        return instance;
+    }
     
     /**
      * constructs new cat and rat game
@@ -39,6 +45,12 @@ public class CatAndRatGame extends Canvas implements Runnable {
      * starts the game
      */
     public CatAndRatGame() {
+        if (instance != null) {
+            throw new RuntimeException("Already initialized");
+        }
+        
+        instance = this;
+
         window = new Window(windowDimension, this, "Cat and Mouse Game");
         inputHandler = new InputHandler();
         this.addKeyListener(inputHandler);
